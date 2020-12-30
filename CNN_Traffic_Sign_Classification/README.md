@@ -25,5 +25,5 @@ The dataset contains images was sourced from Kaggle;
 https://www.kaggle.com/valentynsichkar/traffic-signs-preprocessed
 </br>The dataset contains 51839 unique cropped RGB images of traffic signs stored in pickle file format. The images are split into three sets: train set with 34799 images, validation set with 4410 images, and test set with 12360 images. The dataset also contains images stored in different files with augmented images with different normalizations. The dataset also contains bounding box information for all images of the traffic signs.
 
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/labels.PNG)
 
