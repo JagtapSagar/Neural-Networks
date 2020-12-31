@@ -170,7 +170,7 @@ During tuning, ensemble method was used to get multiple results for most hyperpa
 #### Optimizers
 The Results on optimizer tests with default parameters are presented in the table below.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Optimizers.PNG)
 
 Adam and RMSprop optimizers showed the best results with default parameters. Based on the above results Adam optimizer was selected for further tuning.
 
@@ -187,17 +187,17 @@ Following weight initializations were tested for all the layers in the network.
 *	Variance Scaling
 Accuracy scores of train, validation, and test sets obtained for respective initialization methods can be seen in the table below. Based on the results of this test Random Uniform weight initialization method chosen.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Weight%20initialization%20results.PNG)
 
 #### Activation Function
 A list activation functions consisting of ReLU, Softmax, Tanh, and Sigmoid activation functions were tested on the output layer. The following Figure illustrates the train and validation set accuracy for each of these activations applied to the output layer.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Different%20output%20layer%20activation%20functions.PNG)
 
 Softmax activation was chosen because it returned the highest accuracies and it also seems to begin fitting to train set much earlier.</br>
 Although, ReLU should be the best fit for all initial layers, different activation functions were also tested on all layers. The following figure illustrates the results of these tests.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Testing%20activation%20on%20all%20layers.PNG)
 
 Similar results can be seen from the second test; however it must be noted that the networks that were able to fit in this second test did so slower than when ReLU was applied to all initial layers and Softmax to the final.</br>
 Therefore, picking ReLU activation function for all initial layers and Softmax activation function for the output layer.
@@ -205,7 +205,7 @@ Therefore, picking ReLU activation function for all initial layers and Softmax a
 #### Kernel Sizes
 Combination of kernel sizes ranging from (3,3) to (11,11) was tested on all four convolution layers in the Mini-VGG Net model. The results of kernel tuning are presented in the table below.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Kernel%20Size%20comparision.PNG)
 
 Based on the results above following kernel size combination was selected.
 *	Convolution layer 1: (3,3)
@@ -216,43 +216,43 @@ Based on the results above following kernel size combination was selected.
 #### Convolution Layer Size
 Combination of convolution layer sizes from the list:  [32, 64, 128, 256, 512]  was tested on all four convolution layers in the Mini-VGG Net model. The results of convolution layer size tuning are presented in the table below.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Convolution%20layer%20size.PNG)
 
 Layer size combination of (all 128), (32, 64, 128, 256), and (64, 128, 256, 512) are almost identical in performance. Selecting (64, 128, 256, 512) because it has the highest validation set accuracy, even though it is by a very small margin.
 
 #### Dense Layer Size
 Since Mini-VGG Net has one dense layer before the output layer, sizes of only that layer can vary as the output layer size must be fixed to the number of labels. Results of dense layer test are presented in the table below.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Dense%20layer%20size.PNG)
 
 Based on the results of this tuning, a dense layer size of 128 was chosen. It provided one of the highest accuracies with only 4194432 number of parameters to train compared to 7373025 parameters for dense layer of size 225, and 5734575 parameters for dense layer of size 175.
 
 #### Pool and Stride
 A variety of combination of pool size and stride size was tested. The following tables shows training results for P1, S1 and P2,S2 (max Pooling and stride length) sizes for both the pooling layers.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Pool%20and%20stride%20size.PNG)
 
 Pool size (3,3) and stride length (1,1) were selected for both pool layers because it gave the one of the highest test and validation accuracies.
 
 #### Loss Function
 Three loss function were tested. Cross-entropy based loss functions performed the best and the training results are presented in the table below. Categorical cross-entropy, which is also the default loss function used by keras for multiclass classification, was taken.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Loss%20Functions.PNG)
 
 #### Dense Layer Dropout
 Training for dropout values while changing the dropout rate was performed for dense layer and pooling layers. This section deals with dropout layers for the dense layer only. The table below presents the training results for a range of dropout values.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Dense%20layer%20dropout.PNG)
 
 All values except for 0.4 seem to be are above 98% test set accuracy. However, this seems like a one-off instance since training with 0.4 dropout rate multiple time reveals that it can consistently output the highest performance. This result is presented in the table below.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Dense%20layer%20dropout%20(0.4%20retained).PNG)
 
 #### Pool Layer Dropouts
 This section deals with dropout layers for the pooling layers. The two tables below present the training results for a range of dropout values for the first (top) and the second (bottom) pooling layers, respectively. 
 
-<image>
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Pool%201%20dropout%20values.PNG)
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Pool%202%20dropout%20values.PNG)
 
 Changing dropout values for pooling layers did not seem to affect model performance. And the model seems to perform the worst for very high dropout values. Taking both dropout values 0.25.
 
@@ -260,43 +260,45 @@ Changing dropout values for pooling layers did not seem to affect model performa
 Mini-VGG Net employees batch regularization through all the layers in the network, which on its own has a regularizing effect. Therefore, adding additional Ridge, LASSO, or Elastic regression parameters may not be useful. However, just to be sure a range of values for both kernel regularization and activity regularization were tested using L1 and L2 parameters.</br>
 The table below shows the results for L1 kernel regularization.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/L1%20kernel%20regularization.PNG)
 
 The table below shows the results for L2 kernel regularization.
  
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/L2%20kernel%20regularization.PNG)
 
 The table below shows the results for L1 activity regularization.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/L1%20activity%20regularization.PNG)
 
 The table below shows the results for L2 activity regularization.
+
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/L2%20activity%20regularization.PNG)
 
 ### Snapshot Ensemble
 Snapshot ensemble was tested on the final model. In one version the ensemble was tested with Adam optimizer, which is the default optimizer for our model with its default (0.001) learning rate as the start point. In the second, it was tested with SGD optimizer with default (0.01) learning rate as the initial point.
 </br>
 The image on the left below shows the results of snapshot ensemble using Adam optimizer, and the one on the right is using the SGD optimizer.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Snapshot%20Ensemble.PNG)
 
 From the SGD plot above, it looks like the initial learning rate was too small. Therefore another snapshot ensemble test was run with a larger SGD initial learning rate of 0.1 and 1. The image below illustrates its output.
   
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Snapshot%20Ensemble%202.PNG)
 
 As is evident from the two ensembles above; even with a large initial learning rate at the beginning of each learning rate cycle, neither the cost function nor the accuracies change much unless the learning rate is exceptionally high. This possibly indicates that the model potentially has a very wide or flat local/global minima that it tends to stay in.
 
 ### Final Model Training and Results
 The final model was trained on Mini-VGG Net (illustrated in Table 3) with the hyperparameters that was found via all the testing done in the section 7 above. 
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Final%20model%20hyperparameters.PNG)
 
 The final model was trained with above hyperparameters and the figures below illustrate the Train and Validation Set Accuracy (left), and Loss (right).
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Final%20train%20test%20plots.PNG)
 
 Final Train, Validation, and Test Set accuracies are shown in the table below.
 
-<image>
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/CNN_Traffic_Sign_Classification/Images/Final%20Model%20Performance.PNG)
 
 A classification report for all the three image sets was generated and can be found under Appendix: in section 11.
 
