@@ -4,11 +4,11 @@ Natural Language Inferencing
 Natural language processing (NLP) has grown increasingly elaborate over the past few years. Machine learning models tackle question answering, text extraction, sentence generation, and many other complex tasks. But, can machines determine the relationships between sentences, or is that still left to humans? If NLP can be applied between sentences, this could have profound implications for fact-checking, identifying fake news, analyzing text, and much more.</br></br>
 If you have two sentences, there are three ways they could be related: one could entail the other, one could contradict the other, or they could be unrelated. Natural Language Inferencing (NLI) is a popular NLP problem that involves determining how pairs of sentences (consisting of a premise and a hypothesis) are related.</br></br>
 The main task here is to create an NLI model that assigns labels of 0, 1, or 2 (corresponding to entailment, neutral, and contradiction) to pairs of premises and hypotheses.</br></br>
-Up until last few years Recurrent Neural Networks were considered the go to for NLP related problems. But recently, algorithms such as BERT (Bidirectional Encoder Representations from Transformers) seem to give more promissing and consistent results.
+Up until the last few years, Recurrent Neural Networks were considered the go to for NLP related problems. But recently, algorithms such as BERT (Bidirectional Encoder Representations from Transformers) seem to give more promising and consistent results.
 
 ### Objective
-The goal of this project is to train a set of models to perform the Natural Language Inferencing task and to draw a performance comparison of prediction accuracy and consistency between the RNN based architectures and the BERT transformer based algorithm.
-The RNN based architectures will be tested with a combinations of unidirectional and bidirectional SimpleRNN, LSTM and GRU layers.
+The goal of this project is to train a set of models to perform the Natural Language Inferencing task and to draw a performance comparison of prediction accuracy and consistency between the RNN based architectures and the BERT transformer-based algorithm.
+The RNN based architectures will be tested with a combination of unidirectional and bidirectional SimpleRNN, LSTM, and GRU layers.
 
 ### Dataset
 There are two datasets used in this project. The links have been included for reference:</br>
@@ -25,18 +25,18 @@ Dataset 2 contains The SNLI corpus (version 1.0) is a collection of 570k human-w
 The following pie chart shows the distribution languages of the premise-hypothesis pairs in the dataset.
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/Language%20distribution.png)
 
-The figure below shows the train set data having the columns id, premise, hypothesis, lang_abv, language and label. The label contains 0, 1, or 2 (corresponding to entailment, neutral, and contradiction) respectively. 
+The figure below shows the train set data having the columns id, premise, hypothesis, lang_abv, language, and label. The label contains 0, 1, or 2 (corresponding to entailment, neutral, and contradiction) respectively. 
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/train%20data%201.PNG)
 
-The plot below showcases the distribustion of labels in the train set. The distribution is almost equal for all three labels and therefore equalization will not be necessary.
+The plot below showcases the distribution of labels in the train set. The distribution is almost equal for all three labels and therefore equalization will not be necessary.
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/dataset%201%20label%20distribution.png)
 
-Since this dataset contains multiple languages, we can use any of the freely available language translation API's such as google translate to convert all sentence pairs to english. While this may not be necessary will allow us to keep the tokenized corpus short and have less redundant words.
+Since this dataset contains multiple languages, we can use any of the freely available language translation API such as google translate to convert all sentence pairs to English. While this may not be necessary will allow us to keep the tokenized corpus short and have fewer redundant words.
 
 #### Dataset 2
-As mentioned in earlier section, this dataset contains about 570k human-written English sentences. Therefore no transation of will be necessary. The following image shows distribution of all the labels in the train set.
+As mentioned in an earlier section, this dataset contains about 570k human-written English sentences. Therefore no translation will be necessary. The following image shows the distribution of all the labels in the train set.
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/dataset%202%20label%20distribution.png)
 
@@ -78,21 +78,21 @@ def clean_text(text):
 ```
 
 #### Translation
-The premise-hpyothesis sentence pairs were translated using the the google translate API, but it was found that the API is inconsistent and fails to translate some sentences. This is especially a problem when one part of a sentence pair is translated to english and the other is not. In this case it might just be easier to keep sentences in their original language than to use a pair that uses sentences in two different languages.
+The premise-hypothesis sentence pairs were translated using the google translate API, but it was found that the API is inconsistent and fails to translate some sentences. This is especially a problem when one part of a sentence pair is translated to English and the other is not. In this case, it might just be easier to keep sentences in their original language than to use a pair that uses sentences in two different languages.
 
 #### Combining datasets
-Both the datasets were the combined to create to larger corpus. This majority of this corpus will be in english since the multilingual pairs were already a minority part of the original dataset 1. This combined dataset was used on some of the models that were tested. It was not used with all models because effects of the non-english sentence pair on classification accuracy are unknown. So the combined datast was only tested on models that returned consistent predicyion accuracy during training.
+Both the datasets were combined to create a larger corpus. The majority of this corpus will be in English since the multilingual pairs were already a minority part of the original dataset 1. This combined dataset was used on some of the models that were tested. It was not used with all models because the effects of the non-English sentence pair on classification accuracy are unknown. So the combined dataset was only tested on models that returned consistent prediction accuracy during training.
 
 ### Tokenization
-Tokanization is the process of creating a dictionary of words from the dataset in order to represent word based sentences in coordinate based vector representation. These token based arrays then can be vectorized and a model can be then trained to classify those vectors.
+Tokenization is the process of creating a dictionary of words from the dataset in order to represent word-based sentences in coordinate-based vector representation. These token-based arrays then can be vectorized and a model can be then trained to classify those vectors.
 
-There are a few ways of performing tokenization. In this project tokenization was performed using the 'Tokenizer' function from the tensorflow library. The most uage of takenization involves tokenizing only train set. This allows us get an idea of well the neural network is able to generalize when testing over the validation or test sets.
-This method of implementing tokenizer was implemented in majority of the models trained. However, in order to see how much effect this can have a second method of tokenization was implemented in a few models which involves tokenizing the entire dataset.
+There are a few ways of performing tokenization. In this project, tokenization was performed using the 'Tokenizer' function from the TensorFlow library. The most common usage of tokenization involves tokenizing only train set. This allows us to get an idea of well the neural network can generalize when testing over the validation or test sets.
+This method of implementing tokenizer was implemented in the majority of the models trained. However, to see how much effect this can have a second method of tokenization was implemented in a few models which involves tokenizing the entire dataset.
 
 
 ### Results
 
-The table below shows the final training and validation set accuarcy of various models tested.
+The table below shows the final training and validation set accuracy of various models tested.
 
 | Models | Train set accuracy | Validation set accuracy|
 |---|---|---|
@@ -116,37 +116,37 @@ The table below shows the final training and validation set accuarcy of various 
 | BERT  (Dropout) | 99.56 | 76.50 |
 | BERT  (Dataset 1) MultiLinguistic | 98.72 | 60.85 |
 
-Althought taking a look at the table above above gives us an idea of how these models compare, to get a better understanding we must look into the training and validation accuracy plots.
+Although taking a look at the table above gives us an idea of how these models compare, to get a better understanding we must look into the training and validation accuracy plots.
 
 The following plots show the training and validation set loss and accuracy plots for the model with two bidirectional LSTM and tokenization method 1. It can be observed that the prediction performance while staying close to 39% is inconsistent throughout training while the loss drops smoothly and logarithmically.
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/2%20bi%20lstm%20accuracy%20plot.png) ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/2%20bi%20lstm%20loss%20plot.png)
 
-A similar trend was observed with most other LSTM, GRU and SimpleRNN based models.
+A similar trend was observed with most other LSTM, GRU, and SimpleRNN based models.
 
-Another approach tested was using simple 1D convolution for simple NLP implementation. Simple shallow convolution based architectures cannot be expected to perform as well as RNN's. But results from training that are presented below do show that these models do show that the these models are consistent at the very least and therefore prommising when used in deeper networks.
+Another approach tested was using simple 1D convolution for simple NLP implementation. Simple shallow convolution-based architectures cannot be expected to perform as well as RNN's. But results from the training that are presented below do show that these models are consistent at the very least and therefore promising when used in deeper networks.
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/convolution%20accuracy%20plot.png) ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/convolution%20loss%20plot.png)
 
-Due to the consistency of the prediction of convolution layers a VGG-Net based 1D convolutional network was modeled and trained. The following plots show that a deep convolution based network can certainly be used as a valid method to perform NLI problem. However we might not benefit much from tuning deeper convolutional network as much as a deep RNN based network.
+Due to the consistency of the prediction of convolution layers a VGGNet based 1D convolutional network was modeled and trained. The following plots show that a deep convolution-based network can certainly be used as a valid method to perform NLI problem. However, we might not benefit much from tuning a deeper convolutional network as much as a deep RNN based network.
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/MiniVGG%20accuracy.png) ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/MiniVGG%20loss.png)
 
-To check whether the inconsistency in test set accuracy in RNN was due to tokenizing only train set, a second method of tokenization was used and some of them models were run again. In this method the entire dataset was tokenized.
+To check whether the inconsistency in test set accuracy in RNN was due to tokenizing only the train set, the second method of tokenization was used and some of the models were run again. In this method, the entire dataset was tokenized.
 
-The plot on the left below shows the the performance plots for a network with two bidirectional LSTM, and the plot on the right shows that of a network with three bidirectional LSTM employeed.
+The plot on the left below shows the performance plots for a network with two bidirectional LSTM, and the plot on the right shows that of a network with three bidirectional LSTM employed.
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/double%20lstm%20with%20complete%20tokenization.png) ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/triple%20lstm%20with%20complete%20tokenization.png)
 
-These plots show that the size of the corpus used for training has large implications on the networks ability to generalize with consistency.
+These plots show that the size of the corpus used for training has large implications on the network's ability to generalize with consistency.
 
-Finally, a BERT based model was trained for comparision since it is currently the *go-to* algorithm for NLI related problems.
+Finally, a BERT based model was trained for comparison since it is currently the *go-to* algorithm for NLI related problems.
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/bert%20initial.png)
 
-The simpler BERT based model eaily outperformes shallower RNN's and deep convolution networks in final validation accuracy and consistency of prediction during training epochs and is therefore best suited algorithm for NLI.
+The simpler BERT based model easily outperforms shallower RNN's and deep convolution networks in final validation accuracy and consistency of prediction during training epochs and is, therefore, the best-suited algorithm for NLI.
 
-The BERT model was then trainied on the multilingual dataset 1 and the combined dataset. The plot on the left below shows the training and validation loss and accuracy for BERT model trained on dataset 1 alone. And the plot on the right was trained on the combined dataset.
+The BERT model was then trained on the multilingual dataset 1 and the combined dataset. The plot on the left below shows the training and validation loss and accuracy for the BERT model trained on dataset 1 alone. And the plot on the right was trained on the combined dataset.
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/BERT%20dataset%201.png) ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/BERT%20combined%20dataset.png)
 
@@ -156,7 +156,7 @@ A little bit of tuning and using a larger set from dataset 2 for tuning resulted
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/BERT%20(slightly%20tuned).png)
 
-The following code cell shows the traning and validation accuracy along with training time on the final BERT model.
+The following code cell shows the training and validation accuracy along with training time on the final BERT model.
 
 ```
 Epoch 1/10
@@ -182,6 +182,6 @@ Epoch 10/10
 ```
 
 ### Conclusion
-A comparison of various RNN based architectures was made along side with a few convolution based networks and a BERT model.
+A comparison of various RNN based architectures was made alongside a few convolution based networks and a BERT model.
 
-The BERT transformer based algorithm performs prediction with high accuracy and has shown to be more consistent compared to other competing methods. With little tuning BERT outperformed all the models that were trained and further tuning may provide very promising results.
+The BERT transformer-based algorithm performs prediction with high accuracy and has shown to be more consistent compared to other competing methods. With a little tuning, BERT outperformed all the models that were trained and further tuning may provide very promising results.
