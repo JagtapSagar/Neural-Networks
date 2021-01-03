@@ -12,8 +12,8 @@ The RNN based architectures will be tested with a combinations of unidirectional
 
 ### Dataset
 There are two datasets used in this project. The links have been included for reference:</br>
-* Dataset 1: Contradictory, My Dear Watson (https://www.kaggle.com/c/contradictory-my-dear-watson/data)</br>
-* Dataset 2: Stanford Natural Language Inference Corpus (https://www.kaggle.com/stanfordu/stanford-natural-language-inference-corpus)
+* Dataset 1: [Contradictory, My Dear Watson](https://www.kaggle.com/c/contradictory-my-dear-watson/data)</br>
+* Dataset 2: [Stanford Natural Language Inference Corpus](https://www.kaggle.com/stanfordu/stanford-natural-language-inference-corpus)
  
 Dataset 1 contains 12120 unique examples in the train set. Which consists of premise-hypothesis pairs in fifteen different languages, including Arabic, Bulgarian, Chinese, German, Greek, English, Spanish, French, Hindi, Russian, Swahili, Thai, Turkish, Urdu, and Vietnamese.
 Here, the premise provides the context with which the hypothesis sentence will be compared with. The Data set also contains information about what language the text is written in along with the class label for each data point.
@@ -23,4 +23,12 @@ Dataset 2 contains The SNLI corpus (version 1.0) is a collection of 570k human-w
 ### Data Analysis
 #### Dataset 1
 The following pie chart shows the distribution languages of the premise-hypothesis pairs in the dataset.
-![alt text]()
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/Language%20distribution.png)
+
+The figure below shows the train set data having the columns id, premise, hypothesis, lang_abv, language and label. The label contains 0, 1, or 2 (corresponding to entailment, neutral, and contradiction) respectively. 
+
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/train%20data%201.PNG)
+
+The plot below showcases the distribustion of labels in the train set. The distribution is almost equal for all three labels and therefore equalization will not be necessary.
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/dataset%201%20label%20distribution.png)
+
