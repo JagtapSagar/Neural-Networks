@@ -30,5 +30,14 @@ The figure below shows the train set data having the columns id, premise, hypoth
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/train%20data%201.PNG)
 
 The plot below showcases the distribustion of labels in the train set. The distribution is almost equal for all three labels and therefore equalization will not be necessary.
+
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/dataset%201%20label%20distribution.png)
 
+Since this dataset contains multiple languages, we can use any of the freely available language translation API's such as google translate to convert all sentence pairs to english. While this may not be necessary will allow us to keep the tokenized corpus short and have less redundant words.
+
+#### Dataset 2
+As mentioned in earlier section, this dataset contains about 570k human-written English sentences. Therefore no transation of will be necessary. The following image shows distribution of all the labels in the train set.
+
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/dataset%202%20label%20distribution.png)
+
+Rows with unlabeled data are far and few, and the rows with labeled data are almost equal in distribution. Therefore, no histogram equalization will be necessary.
