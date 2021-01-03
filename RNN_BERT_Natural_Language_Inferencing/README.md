@@ -121,3 +121,67 @@ Althought taking a look at the table above above gives us an idea of how these m
 The following plots show the training and validation set loss and accuracy plots for the model with two bidirectional LSTM and tokenization method 1. It can be observed that the prediction performance while staying close to 39% is inconsistent throughout training while the loss drops smoothly and logarithmically.
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/2%20bi%20lstm%20accuracy%20plot.png) ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/2%20bi%20lstm%20loss%20plot.png)
+
+A similar trend was observed with most other LSTM, GRU and SimpleRNN based models.
+
+Another approach tested was using simple 1D convolution for simple NLP implementation. Simple shallow convolution based architectures cannot be expected to perform as well as RNN's. But results from training that are presented below do show that these models do show that the these models are consistent at the very least and therefore prommising when used in deeper networks.
+
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/convolution%20accuracy%20plot.png) ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/convolution%20loss%20plot.png)
+
+Due to the consistency of the prediction of convolution layers a VGG-Net based 1D convolutional network was modeled and trained. The following plots show that a deep convolution based network can certainly be used as a valid method to perform NLI problem. However we might not benefit much from tuning deeper convolutional network as much as a deep RNN based network.
+
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/MiniVGG%20accuracy.png) ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/MiniVGG%20loss.png)
+
+To check whether the inconsistency in test set accuracy in RNN was due to tokenizing only train set, a second method of tokenization was used and some of them models were run again. In this method the entire dataset was tokenized.
+
+The plot on the left below shows the the performance plots for a network with two bidirectional LSTM, and the plot on the right shows that of a network with three bidirectional LSTM employeed.
+
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/double%20lstm%20with%20complete%20tokenization.png) ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/triple%20lstm%20with%20complete%20tokenization.png)
+
+These plots show that the size of the corpus used for training has large implications on the networks ability to generalize with consistency.
+
+Finally, a BERT based model was trained for comparision since it is currently the *go-to* algorithm for NLI related problems.
+
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/bert%20initial.png)
+
+The simpler BERT based model eaily outperformes shallower RNN's and deep convolution networks in final validation accuracy and consistency of prediction during training epochs and is therefore best suited algorithm for NLI.
+
+The BERT model was then trainied on the multilingual dataset 1 and the combined dataset. The plot on the left below shows the training and validation loss and accuracy for BERT model trained on dataset 1 alone. And the plot on the right was trained on the combined dataset.
+
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/BERT%20dataset%201.png) ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/BERT%20combined%20dataset.png)
+
+The combined dataset is much larger and maybe why it results in lower prediction accuracy when trained on a small subset. But it is evident that once tuning has been performed and when a large portion of the dataset is used for training it is going to return high prediction performance.
+
+A little bit of tuning and using a larger set from dataset 2 for tuning resulted in the final BERT model giving us the following performance.
+
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/BERT%20(slightly%20tuned).png)
+
+The following code cell shows the traning and validation accuracy along with training time on the final BERT model.
+
+```
+Epoch 1/10
+2500/2500 [==============================] - 2047s 813ms/step - loss: 0.9012 - accuracy: 0.5414 - val_loss: 0.5506 - val_accuracy: 0.7771
+Epoch 2/10
+2500/2500 [==============================] - 2034s 814ms/step - loss: 0.4953 - accuracy: 0.8055 - val_loss: 0.4633 - val_accuracy: 0.8241
+Epoch 3/10
+2500/2500 [==============================] - 2034s 813ms/step - loss: 0.3643 - accuracy: 0.8657 - val_loss: 0.4434 - val_accuracy: 0.8336
+Epoch 4/10
+2500/2500 [==============================] - 2034s 814ms/step - loss: 0.2731 - accuracy: 0.9026 - val_loss: 0.5099 - val_accuracy: 0.8324
+Epoch 5/10
+2500/2500 [==============================] - 2035s 814ms/step - loss: 0.2134 - accuracy: 0.9264 - val_loss: 0.5394 - val_accuracy: 0.8326
+Epoch 6/10
+2500/2500 [==============================] - 2036s 814ms/step - loss: 0.1649 - accuracy: 0.9459 - val_loss: 0.6430 - val_accuracy: 0.8324
+Epoch 7/10
+2500/2500 [==============================] - 2037s 815ms/step - loss: 0.1320 - accuracy: 0.9585 - val_loss: 0.7760 - val_accuracy: 0.8332
+Epoch 8/10
+2500/2500 [==============================] - 2036s 815ms/step - loss: 0.1068 - accuracy: 0.9680 - val_loss: 0.8243 - val_accuracy: 0.8303
+Epoch 9/10
+2500/2500 [==============================] - 2037s 815ms/step - loss: 0.0885 - accuracy: 0.9742 - val_loss: 0.9735 - val_accuracy: 0.8301
+Epoch 10/10
+2500/2500 [==============================] - 2038s 815ms/step - loss: 0.0739 - accuracy: 0.9792 - val_loss: 1.0463 - val_accuracy: 0.8323
+```
+
+### Conclusion
+A comparison of various RNN based architectures was made along side with a few convolution based networks and a BERT model.
+
+The BERT transformer based algorithm performs prediction with high accuracy and has shown to be more consistent compared to other competing methods. With little tuning BERT outperformed all the models that were trained and further tuning may provide very promising results.
