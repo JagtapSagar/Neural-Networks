@@ -40,4 +40,78 @@ As mentioned in earlier section, this dataset contains about 570k human-written 
 
 ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/dataset%202%20label%20distribution.png)
 
-Rows with unlabeled data are far and few, and the rows with labeled data are almost equal in distribution. Therefore, no histogram equalization will be necessary.
+Rows with unlabeled data are far and few, and the rows with labeled data are almost equal in distribution. Therefore, no histogram equalization will be needed.
+
+The following word cloud shows some of the most frequently used words from the first 10000 sentence pairs in this dataset.
+
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/word%20cloud.png)
+
+### Preprocessing
+
+The following code was used to clean-up special characters, punctuations, links, and to translate text.
+```
+# Functions to cleanup special characters and translate
+
+def remove_space(text):
+    return " ".join(text.split())
+
+def remove_punctuation(text):
+    return re.sub("[!@#$+%*:()'-]", ' ', text)
+
+def remove_html(text):
+    soup = BeautifulSoup(text, 'lxml')
+    return soup.get_text()
+
+def remove_url(text):
+    return re.sub(r"http\S+", "", text)
+
+def translate(text):
+    translator = Translator()
+    return translator.translate(text, dest='en').text
+
+def clean_text(text):
+    text = remove_space(text)
+    text = remove_html(text)
+    text = remove_url(text)
+    text = remove_punctuation(text)
+    return text
+```
+
+#### Translation
+The premise-hpyothesis sentence pairs were translated using the the google translate API, but it was found that the API is inconsistent and fails to translate some sentences. This is especially a problem when one part of a sentence pair is translated to english and the other is not. In this case it might just be easier to keep sentences in their original language than to use a pair that uses sentences in two different languages.
+
+#### Combining datasets
+Both the datasets were the combined to create to larger corpus. This majority of this corpus will be in english since the multilingual pairs were already a minority part of the original dataset 1. This combined dataset was used on some of the models that were tested. It was not used with all models because effects of the non-english sentence pair on classification accuracy are unknown. So the combined datast was only tested on models that returned consistent predicyion accuracy during training.
+
+### Tokenization
+Tokanization is the process of creating a dictionary of words from the dataset in order to represent word based sentences in coordinate based vector representation. These token based arrays then can be vectorized and a model can be then trained to classify those vectors.
+
+There are a few ways of performing tokenization. In this project tokenization was performed using the 'Tokenizer' function from the tensorflow library. The most uage of takenization involves tokenizing only train set. This allows us get an idea of well the neural network is able to generalize when testing over the validation or test sets.
+This method of implementing tokenizer was implemented in majority of the models trained. However, in order to see how much effect this can have a second method of tokenization was implemented in a few models which involves tokenizing the entire dataset.
+
+
+### Results
+
+
+| Models | Train set accuracy | Validation set accuracy|
+|---|---|---|
+| Simple NN | 33.7 | 33.6 |
+| Single LSTM | 33 | 33 |
+| Single Bidirectional LSTM | 55 | 37.7|
+| Two Bidirectional LSTM | 46.48 | 39.84|
+| Single GRU | 47.30 | 38.94 |
+| Two Bidirectional GRU | 45.89 | 40.14 |
+| Three Bidirectional GRU | 48.13 | 40 |
+| Single Convolution | 37.42 | 34.35 |
+| Simple RNN | 48.75 | 35.48 |
+| Simple Bidirectional RNN | 44 | 37.38 |
+| MiniVGGNet | 98.96 | 52.78 |
+| BERT | 85 | 75 |
+| LSTM+ SimpleRNN | 41 | 35 |
+| Triple LSTM and Tokenization(Method 2) | 95 | 47 |
+| Double LSTM and Tokenization(Method 2) | 98 | 42 |
+| Simple Bert | 85 | 75.15 |
+| BERT (More Epochs) | 98.50 | 75.60 |
+| BERT  (Dropout) | 99.56 | 76.50 |
+| BERT  (Dataset 1) MultiLinguistic | 98.72 | 60.85 |
+
