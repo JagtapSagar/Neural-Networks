@@ -92,6 +92,7 @@ This method of implementing tokenizer was implemented in majority of the models 
 
 ### Results
 
+The table below shows the final training and validation set accuarcy of various models tested.
 
 | Models | Train set accuracy | Validation set accuracy|
 |---|---|---|
@@ -115,3 +116,8 @@ This method of implementing tokenizer was implemented in majority of the models 
 | BERT  (Dropout) | 99.56 | 76.50 |
 | BERT  (Dataset 1) MultiLinguistic | 98.72 | 60.85 |
 
+Althought taking a look at the table above above gives us an idea of how these models compare, to get a better understanding we must look into the training and validation accuracy plots.
+
+The following plots show the training and validation set loss and accuracy plots for the model with two bidirectional LSTM and tokenization method 1. It can be observed that the prediction performance while staying close to 39% is inconsistent throughout training while the loss drops smoothly and logarithmically.
+
+![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/2%20bi%20lstm%20accuracy%20plot.png) ![alt text](https://github.com/JagtapSagar/Neural-Networks/blob/main/RNN_BERT_Natural_Language_Inferencing/Images/2%20bi%20lstm%20loss%20plot.png)
